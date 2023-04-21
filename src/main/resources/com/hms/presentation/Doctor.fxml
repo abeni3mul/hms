@@ -9,39 +9,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <AnchorPane prefHeight="400.0" prefWidth="116.0" style="-fx-background-color: #1a91b5;" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="20.0" layoutY="26.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="User" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../Downloads/user-circle-1-svgrepo-com.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="36.0" layoutY="112.0" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT;" text="Patient" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="GROUP" />
-               </graphic>
-            </Button>
-            <Button layoutX="37.0" layoutY="141.0" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT;" text="Button" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="15.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../Downloads/calendar-svgrepo-com-2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-   </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -49,22 +21,22 @@
                <top>
                   <AnchorPane prefHeight="46.0" prefWidth="473.0" style="-fx-background-color: #1a91b5; -fx-background-radius: 25px;" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="11.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Back" textFill="WHITE">
+                        <Button contentDisplay="TOP" layoutX="12.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Back" textFill="WHITE">
                            <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="13.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../../../../../Downloads/back-svgrepo-com.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                            <font>
-                              <Font size="12.0" />
+                              <Font size="10.0" />
                            </font>
                         </Button>
                         <TextField layoutX="301.0" layoutY="9.0" promptText="Search" style="-fx-background-radius: 20px;" />
                      </children>
                      <BorderPane.margin>
-                        <Insets left="6.0" right="6.0" top="6.0" />
+                        <Insets left="12.0" right="6.0" top="6.0" />
                      </BorderPane.margin>
                      <effect>
                         <DropShadow />
@@ -75,4 +47,42 @@
          </children>
       </AnchorPane>
    </center>
+   <left>
+      <FlowPane columnHalignment="CENTER" orientation="VERTICAL" style="-fx-background-color: #1a91b5;" vgap="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="User" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/user-circle-1-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <FlowPane.margin>
+                  <Insets bottom="15.0" />
+               </FlowPane.margin>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Patient" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="GROUP" />
+               </graphic>
+            </Button>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Apointment" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/calendar-svgrepo-com-2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <effect>
+            <DropShadow />
+         </effect>
+      </FlowPane>
+   </left>
 </BorderPane>
