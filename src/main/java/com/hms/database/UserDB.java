@@ -1,5 +1,6 @@
 package com.hms.database;
 
+import com.hms.business.User;
 import com.hms.business.UserTypes;
 import com.hms.exceptions.InvalidIDException;
 import com.hms.exceptions.UnexpectedErrorException;
@@ -11,11 +12,11 @@ import java.sql.SQLException;
 
 public class UserDB {
 
-    public byte[] getUserPasswordHash(UserTypes type, int userId) throws UnexpectedErrorException, SQLException, InvalidIDException {
+    public byte[] getUserPasswordHash(User user) throws UnexpectedErrorException, SQLException, InvalidIDException {
         Connection db = SqlController.connect();
         String tableName, idColumn;
 
-        switch (type){
+        switch (user.getUserType()){
             case DOCTOR:
                 tableName = "\"Doctor\"";
                 idColumn = "\"doctorId\"";
@@ -36,7 +37,7 @@ public class UserDB {
             PreparedStatement st = db.prepareStatement("select password from " + tableName +
                     " where " + idColumn + " = ?;"
             );
-            st.setInt(1, userId);
+            st.setInt(1, user.getUserId());
 
             ResultSet rs = st.executeQuery();
 

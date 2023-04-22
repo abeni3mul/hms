@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DoctorDB {
     public ArrayList<Doctor> getDoctorByPage(int page) throws UnexpectedErrorException, SQLException {
@@ -34,7 +35,7 @@ public class DoctorDB {
         Connection db = SqlController.connect();
         ArrayList<Doctor> doctors = new ArrayList<>();
         try{
-            PreparedStatement st = db.prepareStatement("select * from \"Patient\" " +
+            PreparedStatement st = db.prepareStatement("select * from \"Doctor\" " +
                     "where lower(\"firstName\") like lower(concat('%', ?, '%')) or " +
                     "lower(\"lastName\") like lower(concat('%', ?, '%')) or " +
                     "\"phoneNumber\" like concat('%', ?, '%');");
@@ -60,13 +61,15 @@ public class DoctorDB {
             PreparedStatement st = db.prepareStatement(
                     "insert into \"Doctor\" " +
                             "(\"firstName\", \"middleName\", \"lastName\", \"phoneNumber\", " +
-                            "\"email\", \"dateOfBirth\") " + "values (?,?,?,?,?,?);");
+                            "\"email\", \"dateOfBirth\", speciality, password) " + "values (?,?,?,?,?,?,?,?);");
             st.setString(1, d.getFirstName());
             st.setString(2, d.getMiddleName());
             st.setString(3, d.getLastName());
             st.setString(4, d.getPhoneNumber());
             st.setString(5, d.getEmail());
-            st.setString(6, d.getDateOfBirth());
+            st.setDate(6, new java.sql.Date(d.getDateOfBirth().getTime()));
+            st.setString(7, d.getSpeciality());
+            st.setBytes(8, d.getHashedPassword());
 
             int rowsInserted = st.executeUpdate();
             if (rowsInserted == 0)
@@ -76,14 +79,14 @@ public class DoctorDB {
             db.close();
         }
     }
-    public Doctor getDoctorInfo(int DoctorID) throws InvalidIDException, UnexpectedErrorException, SQLException{
+    public Doctor getDoctorInfo(int doctorID) throws InvalidIDException, UnexpectedErrorException, SQLException{
         Connection db = SqlController.connect();
         Doctor d;
         try {
             PreparedStatement st = db.prepareStatement(
                     "select * from \"Doctor\" where " +
-                            "\"DoctorId\" = ?;");
-            st.setString(1,DoctorID);
+                            "\"doctorId\" = ?;");
+            st.setInt(1,doctorID);
             ResultSet rs = st.executeQuery();
 
             if(!rs.next())throw new InvalidIDException();
@@ -110,15 +113,15 @@ public class DoctorDB {
                             "\"lastName\" = ?, " +
                             "\"phoneNumber\" = ?, " +
                             "\"email\" = ?, " +
-                            "\"dateOfBirth\" = ?, " +
-                            "where \"DoctorId\" = ?;");
+                            "\"dateOfBirth\" = ? " +
+                            "where \"doctorId\" = ?;");
 
             st.setString(1, d.getFirstName());
             st.setString(2,d.getMiddleName());
             st.setString(3,d.getLastName());
             st.setString(4,d.getPhoneNumber());
             st.setString(5,d.getEmail());
-            st.setDate(6,java.sql.Date.valueOf(d.getDateOfBirth().toString());
+            st.setDate(6, new java.sql.Date(d.getDateOfBirth().getTime()));
 
             int rowsInserted = st.executeUpdate();
             if(rowsInserted == 0)

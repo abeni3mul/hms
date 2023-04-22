@@ -76,7 +76,7 @@ public class PatientDB {
             st.setString(3, p.getLastName());
             st.setString(4, p.getPhoneNumber());
             st.setString(5, p.getEmail());
-            st.setDate(6, java.sql.Date.valueOf(p.getDateOfBirth().toString()));
+            st.setDate(6, new java.sql.Date(p.getDateOfBirth().getTime()));
             st.setString(7, p.getBloodType());
             st.setString(8, p.getInsuranceCompanyName());
             st.setInt(9, p.getInsuranceNumber());
@@ -142,7 +142,7 @@ public class PatientDB {
             st.setString(3, p.getLastName());
             st.setString(4, p.getPhoneNumber());
             st.setString(5, p.getEmail());
-            st.setDate(6, java.sql.Date.valueOf(p.getDateOfBirth().toString()));
+            st.setDate(6, new java.sql.Date(p.getDateOfBirth().getTime()));
             st.setString(7, p.getBloodType());
             st.setString(8, p.getInsuranceCompanyName());
             st.setInt(9, p.getInsuranceNumber());
