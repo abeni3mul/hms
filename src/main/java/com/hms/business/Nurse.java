@@ -1,5 +1,7 @@
 package com.hms.business;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Nurse {
@@ -66,5 +68,18 @@ public class Nurse {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static Nurse map(ResultSet rs) throws SQLException {
+        Nurse nurse = new Nurse();
+        nurse.setNurseId(rs.getInt("doctorId"));
+        nurse.setFirstName(rs.getString("firstName"));
+        nurse.setMiddleName(rs.getString("middleName"));
+        nurse.setLastName(rs.getString("lastname"));
+        nurse.setPhoneNumber(rs.getString("phoneNumber"));
+        nurse.setEmail(rs.getString("email"));
+        nurse.setDateOfBirth(rs.getDate("dateOfBirth"));
+
+        return nurse;
     }
 }
