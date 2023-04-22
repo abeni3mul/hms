@@ -52,7 +52,7 @@
                   <Image url="@assets/password-protection-privacy-access-verification-code-svgrepo-com.png" />
                </image>
             </ImageView>
-            <ChoiceBox fx:id="cbxUserType" layoutX="96.0" layoutY="159.0" prefHeight="26.0" prefWidth="161.0" />
+            <ComboBox fx:id="cbxUserType" layoutX="91.0" layoutY="143.0" prefHeight="26.0" prefWidth="166.0" promptText="Choose a user type" />
          </children>
       </AnchorPane>
    </center>

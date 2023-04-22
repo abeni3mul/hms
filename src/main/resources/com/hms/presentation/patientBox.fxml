@@ -29,7 +29,7 @@
          <graphic>
             <ImageView fitHeight="80.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/syringe-svgrepo-com.png" />
+                  <Image url="@assets/syringe-svgrepo-com.png" />
                </image>
             </ImageView>
          </graphic>
@@ -44,7 +44,7 @@
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/doc-svgrepo-com.png" />
+                  <Image url="@assets/doc-svgrepo-com.png" />
                </image>
             </ImageView>
          </graphic>
@@ -59,7 +59,7 @@
          <graphic>
             <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/medical-examination-female-svgrepo-com.png" />
+                  <Image url="@assets/medical-examination-female-svgrepo-com.png" />
                </image>
             </ImageView>
          </graphic>

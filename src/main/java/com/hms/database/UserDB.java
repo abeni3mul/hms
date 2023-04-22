@@ -42,7 +42,7 @@ public class UserDB {
             ResultSet rs = st.executeQuery();
 
             if(!rs.next())
-                throw new InvalidIDException("Invalid username or password");
+                throw new InvalidIDException("Invalid user id or password");
 
             return rs.getBytes("password");
         }
