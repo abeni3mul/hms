@@ -66,7 +66,7 @@ public class DoctorDB {
             st.setString(3, d.getLastName());
             st.setString(4, d.getPhoneNumber());
             st.setString(5, d.getEmail());
-            st.setString(6, d.getDateOfBirth());
+            st.setDate(6, java.sql.Date.valueOf(d.getDateOfBirth().toString()));
 
             int rowsInserted = st.executeUpdate();
             if (rowsInserted == 0)
@@ -83,7 +83,8 @@ public class DoctorDB {
             PreparedStatement st = db.prepareStatement(
                     "select * from \"Doctor\" where " +
                             "\"DoctorId\" = ?;");
-            st.setString(1,DoctorID);
+
+            st.setInt(1,DoctorID);
             ResultSet rs = st.executeQuery();
 
             if(!rs.next())throw new InvalidIDException();
@@ -118,7 +119,7 @@ public class DoctorDB {
             st.setString(3,d.getLastName());
             st.setString(4,d.getPhoneNumber());
             st.setString(5,d.getEmail());
-            st.setDate(6,java.sql.Date.valueOf(d.getDateOfBirth().toString());
+            st.setDate(6,java.sql.Date.valueOf(d.getDateOfBirth().toString()));
 
             int rowsInserted = st.executeUpdate();
             if(rowsInserted == 0)
