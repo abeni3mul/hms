@@ -24,7 +24,7 @@
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../Downloads/back-svgrepo-com.png" />
+                                    <Image url="@assets/back-svgrepo-com.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -53,7 +53,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/user-circle-1-svgrepo-com.png" />
+                        <Image url="@assets/user-circle-1-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -65,7 +65,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/patient-profile-people-svgrepo-com.png" />
+                        <Image url="@assets/patient-profile-people-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -74,7 +74,7 @@
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/calendar-svgrepo-com-2.png" />
+                        <Image url="@assets/calendar-svgrepo-com-2.png" />
                      </image>
                   </ImageView>
                </graphic>
