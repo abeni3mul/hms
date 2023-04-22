@@ -71,6 +71,7 @@ public class DoctorDB {
             st.setString(7, d.getSpeciality());
             st.setBytes(8, d.getHashedPassword());
 
+
             int rowsInserted = st.executeUpdate();
             if (rowsInserted == 0)
                 throw new UnexpectedErrorException("Failed to register patient. Please, try again.");
