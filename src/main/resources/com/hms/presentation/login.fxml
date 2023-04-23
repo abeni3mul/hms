@@ -34,7 +34,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: neon blue;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtUserId" layoutX="95.0" layoutY="208.0" promptText="User ID" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="93.0" />
-            <PasswordField fx:id="txtPassword" layoutX="95.0" layoutY="259.0" promptText="Password" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="93.0" />
+            <PasswordField fx:id="txtPassword" layoutX="95.0" layoutY="259.0" onAction="#onLogin" promptText="Password" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="93.0" />
             <Button layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#onLogin" style="-fx-background-color: #1a91b5;" text="Log In" textFill="WHITE" AnchorPane.leftAnchor="139.0" AnchorPane.rightAnchor="154.0" />
             <Hyperlink contentDisplay="CENTER" layoutX="97.0" layoutY="454.0" text="Forget Your Password" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="110.0" />
             <Text layoutX="117.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Log In" wrappingWidth="100.849609375" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="132.150390625">
