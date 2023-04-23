@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
@@ -34,7 +36,7 @@ public class LoginController {
     }
     @FXML
     protected void onLogin(ActionEvent e){
-        if(txtUserId.getText().trim().equals("") || txtPassword.getText().trim().equals("") || cbxUserType.getValue().equals("")){
+        if(txtUserId.getText().trim().equals("") || txtPassword.getText().trim().equals("") || cbxUserType.getValue() == null || cbxUserType.getValue().equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid Input");
             alert.setContentText("User type, user id password field are required.");
@@ -58,7 +60,7 @@ public class LoginController {
 
             txtUserId.setText("");
             txtPassword.setText("");
-            cbxUserType.setValue("");
+            cbxUserType.setValue(null);
 
             String fxmlPath = "user.fxml";
 
@@ -73,6 +75,17 @@ public class LoginController {
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(userRoot);
             stage.setScene(scene);
+            switch(userType){
+                case DOCTOR:
+                    stage.setTitle("Doctor");
+                    break;
+                case MANAGER:
+                    stage.setTitle("Manager");
+                    break;
+                case NURSE:
+                    stage.setTitle("Nurse");
+                    break;
+            }
             stage.show();
 
         }
@@ -97,4 +110,6 @@ public class LoginController {
         }
 
     }
+
+
 }
