@@ -87,7 +87,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField layoutX="287.0" layoutY="8.0" promptText="Search" style="-fx-background-radius: 20px;" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="8.0" />
+                  <TextField fx:id="txtSearchKey" layoutX="287.0" layoutY="8.0" onAction="#onPatientSearch" promptText="Search" style="-fx-background-radius: 20px;" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="8.0" />
                </children>
                <effect>
                   <DropShadow />
