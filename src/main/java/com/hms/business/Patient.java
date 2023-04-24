@@ -1,7 +1,11 @@
 package com.hms.business;
 
+import com.hms.database.PatientDB;
+import com.hms.exceptions.UnexpectedErrorException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Patient {
@@ -84,6 +88,10 @@ public class Patient {
     }
     public void setInsuranceNumber(int insuranceNumber) {
         this.insuranceNumber = insuranceNumber;
+    }
+
+    public static  ArrayList<Patient> searchPatient(String key) throws SQLException, UnexpectedErrorException {
+        return new PatientDB().searchPatient(key);
     }
 
     public static Patient map(ResultSet rs) throws SQLException {
