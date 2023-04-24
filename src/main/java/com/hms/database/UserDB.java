@@ -16,24 +16,26 @@ public class UserDB {
         Connection db = SqlController.connect();
         String tableName, idColumn;
 
-        switch (user.getUserType()){
-            case DOCTOR:
-                tableName = "\"Doctor\"";
-                idColumn = "\"doctorId\"";
-                break;
-            case NURSE:
-                tableName = "\"Nurse\"";
-                idColumn = "\"nurseId\"";
-                break;
-            case MANAGER:
-                tableName = "\"Manager\"";
-                idColumn = "\"managerId\"";
-                break;
-            default:
-                throw new UnexpectedErrorException("Invalid user type.");
-        }
+
 
         try{
+            switch (user.getUserType()){
+                case DOCTOR:
+                    tableName = "\"Doctor\"";
+                    idColumn = "\"doctorId\"";
+                    break;
+                case NURSE:
+                    tableName = "\"Nurse\"";
+                    idColumn = "\"nurseId\"";
+                    break;
+                case MANAGER:
+                    tableName = "\"Manager\"";
+                    idColumn = "\"managerId\"";
+                    break;
+                default:
+                    throw new UnexpectedErrorException("Invalid user type.");
+            }
+
             PreparedStatement st = db.prepareStatement("select password from " + tableName +
                     " where " + idColumn + " = ?;"
             );

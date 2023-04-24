@@ -76,7 +76,7 @@ public class UserController {
         vboxMain.getChildren().clear();
         try {
 
-            ArrayList<Patient> patients = new PatientDB().searchPatient(txtSearchKey.getText().trim());
+
 
             if(this.patientTable == null || this.patientTableController == null){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("patientTable.fxml"));
@@ -84,8 +84,6 @@ public class UserController {
                 this.patientTableController = loader.getController();
             }
 
-            ObservableList<Patient> patientObservableList = FXCollections.observableArrayList(patients);
-            this.patientTableController.setPatientList(patientObservableList);
 
             vboxMain.getChildren().add(this.patientTable);
         }
