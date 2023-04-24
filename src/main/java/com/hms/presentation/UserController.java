@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -26,27 +27,41 @@ public class UserController {
     private TextField txtSearchKey;
     private Parent patientTable;
     private PatientTableController patientTableController;
+    private int doctorId, nurseId;
     private enum Pages{
         PATIENT,
         APPOINTMENT
     };
     private Pages activePage = Pages.PATIENT;
     public void initialize() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("patientBox.fxml"));
-        vboxMain.getChildren().add(loader.load());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patientTable.fxml"));
+        this.patientTable = loader.load();
+        this.patientTableController = loader.getController();
+        vboxMain.getChildren().clear();
+        vboxMain.getChildren().add(this.patientTable);
+        VBox.setVgrow(this.patientTable, Priority.ALWAYS);
+    }
+
+    public void setDoctorId(int doctorId){
+        this.nurseId = 0;
+        this.doctorId = doctorId;
+    }
+
+    public void setNurseId(int nurseId){
+        this.doctorId = 0;
+        this.nurseId = nurseId;
     }
 
     @FXML
     public void onPatientClick (ActionEvent e){
         if(activePage == Pages.PATIENT)
             return;
-
-
     }
 
     @FXML
     public void onAppointmentClick (ActionEvent e){
-
+        if(activePage == Pages.APPOINTMENT)
+            return;
     }
 
     @FXML
