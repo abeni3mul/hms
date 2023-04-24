@@ -87,7 +87,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <FlowPane alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <FlowPane alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
                            <graphic>

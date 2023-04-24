@@ -58,9 +58,7 @@ public class LoginController {
             if(!credentialsMatch)
                 throw new InvalidIDException("Invalid user id or password.");
 
-            txtUserId.setText("");
-            txtPassword.setText("");
-            cbxUserType.setValue(null);
+
 
             String fxmlPath = "user.fxml";
 
@@ -92,6 +90,9 @@ public class LoginController {
                     stage.setTitle("Nurse");
                     break;
             }
+            txtUserId.setText("");
+            txtPassword.setText("");
+            cbxUserType.setValue(null);
             stage.show();
 
         }
