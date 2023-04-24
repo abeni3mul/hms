@@ -71,7 +71,13 @@ public class LoginController {
             userRoot = loader.load();
 
             UserController userController = loader.getController();
-
+            switch (userType){
+                case DOCTOR:
+                    userController.setDoctorId(Integer.parseInt(txtUserId.getText().trim()));
+                    break;
+                case NURSE:
+                    userController.setNurseId(Integer.parseInt(txtUserId.getText().trim()));
+            }
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(userRoot);
             stage.setScene(scene);
