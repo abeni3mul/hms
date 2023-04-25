@@ -28,7 +28,7 @@ public class MedicalRecordDB {
                             "from \"MedicalRecord\" as MR " +
                             "join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
                             "join\"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
-                            "where MR.\"patientId\" = ?;"
+                            "where MR.\"patientId\" = ? and MR.diagnosis != null;"
             );
 
             st.setInt(1, patientId);
@@ -61,7 +61,7 @@ public class MedicalRecordDB {
                     "from \"MedicalRecord\" as MR " +
                     "join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
                     "join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
-                    "where MR.\"recordId\" = ?"
+                    "where MR.\"recordId\" = ? and Mr.diagnosis != null;"
             );
 
             st.setString(1, medicalRecordId.toString());
@@ -85,15 +85,14 @@ public class MedicalRecordDB {
 
         try{
             PreparedStatement st = db.prepareStatement(
-                    "insert into \"MedicalRecord\" (\"patientId\", \"doctorId\", \"nurseId\", diagnosis, treatment)" +
-                            "values (?,?,?,?,?);"
+                    "insert into \"MedicalRecord\" (\"patientId\", \"doctorId\", \"nurseId\", diagnosis)" +
+                            "values (?,?,?,?);"
             );
 
             st.setInt(1, medicalRecord.getPatientId());
             st.setInt(2, medicalRecord.getDoctorId());
             st.setInt(3, medicalRecord.getNurseId());
             st.setString(4, medicalRecord.getDiagnosis());
-            st.setString(5, medicalRecord.getTreatment());
 
             int rowsInserted = st.executeUpdate();
 
