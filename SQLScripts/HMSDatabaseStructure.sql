@@ -51,13 +51,14 @@ create table "MedicalRecord"(
     "doctorId" int,
     "nurseId" int,
     "dateAndTime" timestamp DEFAULT now() not null,
-    "diagnosis" text not null,
-    "treatment" text not null,
+    "diagnosis" text,
+    "treatment" text,
     constraint fk_medicalRecordPatient foreign key ("patientId") references "Patient"("patientId"),
     constraint fk_medicalRecordDoctor foreign key ("doctorId") references "Doctor"("doctorId"),
     constraint fk_medicalRecordNurse foreign key ("nurseId") references "Nurse"("nurseId"),
     constraint chk_nurseOrDoctor check ("doctorId" is not null or "nurseId" is not null),
-    constraint chk_timestampNotFuture check ( "dateAndTime" <= now() )
+    constraint chk_timestampNotFuture check ( "dateAndTime" <= now() ),
+    constraint chk_diagnosisOrTreatment check("diagnosis" is not null or "treatment" is not null)
 );
 
 create table "Manager"(
