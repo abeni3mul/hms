@@ -1,18 +1,28 @@
 package com.hms.presentation;
 
+import com.hms.business.Patient;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class PatientTable {
+    private int id;
     private SimpleStringProperty fullName;
     private SimpleStringProperty phoneNumber;
     private SimpleStringProperty email;
     private SimpleStringProperty dateOfBirth;
 
-    public PatientTable(String fullName, String phoneNumber, String email, String dateOfBirth) {
+    public PatientTable(int id, String fullName, String phoneNumber, String email, String dateOfBirth) {
+        this.id = id;
         this.fullName = new SimpleStringProperty(fullName);
         this.phoneNumber =  new SimpleStringProperty(phoneNumber);
         this.email = new SimpleStringProperty(email);
         this.dateOfBirth = new SimpleStringProperty(dateOfBirth);
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public String getFullName() {
@@ -61,5 +71,19 @@ public class PatientTable {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth.set(dateOfBirth);
+    }
+
+    public static ArrayList<PatientTable> map(ArrayList<Patient> patients){
+        ArrayList<PatientTable> patientTableList = new ArrayList<>();
+        for(Patient patient : patients){
+            patientTableList.add(new PatientTable(
+                    patient.getPatientId(),
+                    patient.getFirstName() + " " + patient.getMiddleName().charAt(0) + ". " + patient.getLastName(),
+                    patient.getPhoneNumber(),
+                    patient.getEmail(),
+                    patient.getDateOfBirth().toString()
+                    ));
+        }
+        return patientTableList;
     }
 }

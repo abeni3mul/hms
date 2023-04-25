@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -27,7 +24,7 @@ public class UserController {
     private TextField txtSearchKey;
     private Parent patientTable;
     private PatientTableController patientTableController;
-    private int doctorId, nurseId;
+    private int doctorId, nurseId, selectedPatient;
     private enum Pages{
         PATIENT,
         APPOINTMENT
@@ -76,7 +73,9 @@ public class UserController {
         vboxMain.getChildren().clear();
         try {
 
+            ArrayList<Patient> patients = new PatientDB().searchPatient(this.txtSearchKey.getText().trim());
 
+            ObservableList<PatientTable> patientTableList = FXCollections.observableArrayList(PatientTable.map(patients));
 
             if(this.patientTable == null || this.patientTableController == null){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("patientTable.fxml"));
@@ -84,6 +83,25 @@ public class UserController {
                 this.patientTableController = loader.getController();
             }
 
+            this.patientTableController.setPatientList(patientTableList);
+            this.patientTableController.setRowDoubleClickHandler(tv -> {
+                TableRow<PatientTable> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if(event.getClickCount() != 2 || row.isEmpty())
+                        return;
+                    this.selectedPatient = row.getItem().getId();
+
+                    this.vboxMain.getChildren().clear();
+                    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("patientBox.fxml"));
+                    try {
+                        vboxMain.getChildren().add(loader.load());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
+                return row;
+            });
 
             vboxMain.getChildren().add(this.patientTable);
         }
