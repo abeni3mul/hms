@@ -1,9 +1,17 @@
 package com.hms.business;
 
+import com.hms.database.ManagerDB;
+import com.hms.exceptions.UnexpectedErrorException;
 import javafx.scene.Node;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Manager extends Node {
@@ -15,16 +23,7 @@ public class Manager extends Node {
     private String phoneNumber;
     private String email;
     private String password;
-    private String position;
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
+    private byte[] hashedPassword;
     public int getManagerId() {
         return this.managerId;
     }
@@ -74,12 +73,26 @@ public class Manager extends Node {
         this.email = email;
     }
 
+    public byte[] getHashedPassword() {
+        return hashedPassword;
+    }
+
     public String getPassword() {
         return this.password;
     }
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void save() throws SQLException, UnexpectedErrorException {
+        try {
+            this.hashedPassword = MessageDigest.getInstance("SHA-256").digest(this.password.getBytes((StandardCharsets.UTF_8)));
+        }catch (NoSuchAlgorithmException e){
+            throw  new UnexpectedErrorException();
+        }
+        new ManagerDB().addManager(this);
+    }
+
     public static Manager map(ResultSet rs) throws SQLException {
         Manager manager = new Manager();
         manager.setManagerId(rs.getInt("doctorId"));

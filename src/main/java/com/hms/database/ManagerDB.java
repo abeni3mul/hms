@@ -61,13 +61,14 @@ public class ManagerDB {
             PreparedStatement st = db.prepareStatement(
                     "insert into \"Manager\" " +
                             "(\"firstName\", \"middleName\", \"lastName\", \"phoneNumber\", " +
-                            "\"email\", \"dateOfBirth\") " + "values (?,?,?,?,?,?);");
+                            "\"email\", \"dateOfBirth\", \"password\") " + "values (?,?,?,?,?,?,?);");
             st.setString(1, m.getFirstName());
             st.setString(2, m.getMiddleName());
             st.setString(3, m.getLastName());
             st.setString(4, m.getPhoneNumber());
             st.setString(5, m.getEmail());
-            st.setDate(6, java.sql.Date.valueOf(m.getDateOfBirth().toString()));
+            st.setDate(6, new java.sql.Date((m.getDateOfBirth().getTime())));
+            st.setBytes(7, m.getHashedPassword());
 
             int rowsInserted = st.executeUpdate();
             if (rowsInserted == 0)

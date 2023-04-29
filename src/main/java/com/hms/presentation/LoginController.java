@@ -65,30 +65,37 @@ public class LoginController {
                 fxmlPath = "manager.fxml";
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent userRoot = loader.load();
+            Parent root = loader.load();
 
-            UserController userController = loader.getController();
-            switch (userType){
+            UserController userController = null;
+            ManagerController managerController = null;
+            if(userType != UserTypes.MANAGER)
+                userController = loader.getController();
+            if(userType == UserTypes.MANAGER)
+                managerController = loader.getController();
+            switch (userType) {
                 case DOCTOR:
                     userController.setDoctorId(Integer.parseInt(txtUserId.getText().trim()));
                     break;
                 case NURSE:
                     userController.setNurseId(Integer.parseInt(txtUserId.getText().trim()));
+                    break;
             }
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(userRoot);
+            Scene scene = new Scene(root);
             stage.setScene(scene);
-            ((UserController) loader.getController()).setOnLogout(this.onLogout);
+            if(userController != null)
+                userController.setOnLogout(this.onLogout);
             switch(userType){
                 case DOCTOR:
-                    ((UserController) loader.getController()).setDoctorId(Integer.parseInt(txtUserId.getText()));
+                    userController.setDoctorId(Integer.parseInt(txtUserId.getText()));
                     stage.setTitle("Doctor");
                     break;
                 case MANAGER:
                     stage.setTitle("Manager");
                     break;
                 case NURSE:
-                    ((UserController) loader.getController()).setNurseId(Integer.parseInt(txtUserId.getText()));
+                    userController.setNurseId(Integer.parseInt(txtUserId.getText()));
                     stage.setTitle("Nurse");
                     break;
             }
