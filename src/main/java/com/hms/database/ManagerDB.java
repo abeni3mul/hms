@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class managerDB {
+public class ManagerDB {
     public ArrayList<Manager> getManagerByPage(int page) throws UnexpectedErrorException, SQLException {
         Connection db = SqlController.connect();
         ArrayList<Manager> managers = new ArrayList<>();

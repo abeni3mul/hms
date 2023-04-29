@@ -3,12 +3,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-    <TableColumn prefWidth="200.0" text="Full Name" />
-    <TableColumn prefWidth="100.0" text="Position" />
+      <TableColumn text="ID" />
+    <TableColumn prefWidth="150.0" text="Full Name" />
+    <TableColumn prefWidth="90.0" text="Position" />
       <TableColumn prefWidth="100.0" text="Phone Number" />
       <TableColumn prefWidth="100.0" text="Email" />
-      <TableColumn prefWidth="100.0" text="Date Of Birth" />
+      <TableColumn text="Date Of Birth" />
   </columns>
 </TableView>
