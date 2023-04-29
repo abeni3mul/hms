@@ -72,7 +72,7 @@
          <children>
             <AnchorPane maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a91b5; -fx-background-radius: 25px;" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
                <children>
-                  <Button contentDisplay="TOP" layoutX="12.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
+                  <Button contentDisplay="TOP" layoutX="12.0" layoutY="4.0" mnemonicParsing="false" onAction="#onBackClick" style="-fx-background-color: transparent;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="4.0">
                      <graphic>
                         <ImageView fitHeight="13.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,7 +91,7 @@
                      <children>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="btnAdd" fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@assets/add-svgrepo-com.png" />
                                  </image>

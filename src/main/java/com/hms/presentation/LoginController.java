@@ -81,12 +81,14 @@ public class LoginController {
             stage.setScene(scene);
             switch(userType){
                 case DOCTOR:
+                    ((UserController) loader.getController()).setDoctorId(Integer.parseInt(txtUserId.getText()));
                     stage.setTitle("Doctor");
                     break;
                 case MANAGER:
                     stage.setTitle("Manager");
                     break;
                 case NURSE:
+                    ((UserController) loader.getController()).setNurseId(Integer.parseInt(txtUserId.getText()));
                     stage.setTitle("Nurse");
                     break;
             }

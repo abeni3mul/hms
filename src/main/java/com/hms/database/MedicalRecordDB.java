@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class MedicalRecordDB {
-    public ArrayList<MedicalRecord> getMedicalRecordByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
+    public ArrayList<MedicalRecord> getMedicalRecordByPatientId(int patientId, boolean isMedication) throws SQLException, UnexpectedErrorException {
         Connection db = SqlController.connect();
         ArrayList<MedicalRecord> medicalRecords = new ArrayList<>();
 
         try{
+            String condition = isMedication ? "MR.treatment is not null;" : "MR.diagnosis is not null;";
             PreparedStatement st = db.prepareStatement(
                     "select MR.\"recordId\"," +
                                 "D.\"firstName\" as \"doctorFirstName\", " +
@@ -26,9 +27,9 @@ public class MedicalRecordDB {
                                 "N.\"lastName\" as \"nurseLastName\"," +
                                 "MR.\"dateAndTime\" " +
                             "from \"MedicalRecord\" as MR " +
-                            "join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
-                            "join\"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
-                            "where MR.\"patientId\" = ? and MR.diagnosis != null;"
+                            "left join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
+                            "left join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
+                            "where MR.\"patientId\" = ? and " + condition
             );
 
             st.setInt(1, patientId);
@@ -46,6 +47,10 @@ public class MedicalRecordDB {
         }
     }
 
+    public ArrayList<MedicalRecord> getMedicalRecordByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
+        return this.getMedicalRecordByPatientId(patientId, false);
+    }
+
     public MedicalRecord getMedicalRecord(UUID medicalRecordId) throws SQLException, UnexpectedErrorException {
         Connection db = SqlController.connect();
 
@@ -59,9 +64,9 @@ public class MedicalRecordDB {
                         "N.\"middleName\" as \"nurseMiddleName\"," +
                         "N.\"lastName\" as \"nurseLastName\"" +
                     "from \"MedicalRecord\" as MR " +
-                    "join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
-                    "join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
-                    "where MR.\"recordId\" = ? and Mr.diagnosis != null;"
+                    "left join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
+                    "left join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
+                    "where MR.\"recordId\" = ?;"
             );
 
             st.setString(1, medicalRecordId.toString());
@@ -85,14 +90,15 @@ public class MedicalRecordDB {
 
         try{
             PreparedStatement st = db.prepareStatement(
-                    "insert into \"MedicalRecord\" (\"patientId\", \"doctorId\", \"nurseId\", diagnosis)" +
-                            "values (?,?,?,?);"
+                    "insert into \"MedicalRecord\" (\"patientId\", \"doctorId\", \"nurseId\", diagnosis, treatment)" +
+                            "values (?,?,?,?,?);"
             );
 
             st.setInt(1, medicalRecord.getPatientId());
             st.setInt(2, medicalRecord.getDoctorId());
             st.setInt(3, medicalRecord.getNurseId());
             st.setString(4, medicalRecord.getDiagnosis());
+            st.setString(5, medicalRecord.getTreatment());
 
             int rowsInserted = st.executeUpdate();
 

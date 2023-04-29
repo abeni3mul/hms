@@ -1,5 +1,8 @@
 package com.hms.business;
 
+import com.hms.database.MedicalRecordDB;
+import com.hms.exceptions.UnexpectedErrorException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -79,6 +82,14 @@ public class MedicalRecord {
     }
     public void setNurse(Nurse nurse) {
         this.nurse = nurse;
+    }
+
+    public static ArrayList<MedicalRecord> getMedicalRecordByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
+        return new MedicalRecordDB().getMedicalRecordByPatientId(patientId);
+    }
+
+    public static ArrayList<MedicalRecord> getMedicationByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
+        return new MedicalRecordDB().getMedicalRecordByPatientId(patientId, true);
     }
 
     public static MedicalRecord map(ResultSet rs) throws SQLException {
