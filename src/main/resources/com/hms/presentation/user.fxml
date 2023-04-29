@@ -12,7 +12,7 @@
    <left>
       <FlowPane columnHalignment="CENTER" orientation="VERTICAL" style="-fx-background-color: #1a91b5;" vgap="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Button contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="User" textFill="WHITE">
+            <Button fx:id="btnUser" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="User" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -27,7 +27,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Patient" textFill="WHITE">
+            <Button fx:id="btnPatient" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Patient" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,18 +39,25 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Apointment" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="15.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/calendar-svgrepo-com-2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <AnchorPane fx:id="apLogoutContainer">
+               <children>
+                  <Button fx:id="btnLogout" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: TRANSPARENT; -fx-background-radius: 20px;" text="Logout" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons8-exit-96.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </AnchorPane>
          </children>
          <padding>
             <Insets left="5.0" right="5.0" />
@@ -89,14 +96,17 @@
                   </Button>
                   <FlowPane alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#onButtonAddClick" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fx:id="btnAdd" fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@assets/add-svgrepo-com.png" />
                                  </image>
                               </ImageView>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TextField fx:id="txtSearchKey" onAction="#onPatientSearch" promptText="Search" style="-fx-background-radius: 20px;" />
                      </children></FlowPane>

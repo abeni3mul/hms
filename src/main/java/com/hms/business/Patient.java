@@ -94,6 +94,10 @@ public class Patient {
         return new PatientDB().searchPatient(key);
     }
 
+    public void save() throws SQLException, UnexpectedErrorException {
+        new PatientDB().addPatient(this);
+    }
+
     public static Patient map(ResultSet rs) throws SQLException {
         Patient patient = new Patient();
         patient.setPatientId(rs.getInt("patientId"));

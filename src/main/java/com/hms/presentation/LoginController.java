@@ -5,6 +5,7 @@ import com.hms.business.UserTypes;
 import com.hms.exceptions.InvalidIDException;
 import com.hms.exceptions.UnexpectedErrorException;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -28,8 +29,6 @@ public class LoginController {
     private TextField txtUserId;
     @FXML
     private PasswordField txtPassword;
-    @FXML
-    private Parent userRoot;
 
     public void initialize(){
         cbxUserType.getItems().addAll("Manager", "Doctor", "Nurse");
@@ -66,7 +65,7 @@ public class LoginController {
                 fxmlPath = "manager.fxml";
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            userRoot = loader.load();
+            Parent userRoot = loader.load();
 
             UserController userController = loader.getController();
             switch (userType){
@@ -79,6 +78,7 @@ public class LoginController {
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(userRoot);
             stage.setScene(scene);
+            ((UserController) loader.getController()).setOnLogout(this.onLogout);
             switch(userType){
                 case DOCTOR:
                     ((UserController) loader.getController()).setDoctorId(Integer.parseInt(txtUserId.getText()));
@@ -94,7 +94,7 @@ public class LoginController {
             }
             txtUserId.setText("");
             txtPassword.setText("");
-            cbxUserType.setValue(null);
+            cbxUserType.setValue(cbxUserType.getPromptText());
             stage.show();
 
         }
@@ -120,5 +120,11 @@ public class LoginController {
 
     }
 
+    private EventHandler<ActionEvent> onLogout = e -> {
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.setTitle("Login");
+        stage.setScene(this.bpMainParent.getScene());
+        stage.show();
+    };
 
 }

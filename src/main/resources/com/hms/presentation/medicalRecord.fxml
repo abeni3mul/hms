@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="5.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.presentation.MedicalRecordController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints vgrow="NEVER" />
+    <RowConstraints vgrow="NEVER" />
+    <RowConstraints valignment="TOP" vgrow="NEVER" />
+      <RowConstraints maxHeight="372.0" minHeight="10.0" prefHeight="311.0" valignment="TOP" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <FlowPane alignment="CENTER_LEFT" hgap="10.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+         <children>
+            <Label fx:id="lblStaffType" text="Doctor:" />
+            <Label fx:id="lblStaffName" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </FlowPane>
+      <FlowPane alignment="CENTER_LEFT" hgap="10.0" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
+         <children>
+            <Label text="Date and Time:" />
+            <Label fx:id="lblDateAndTime" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </FlowPane>
+      <Label text="Treatment:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+      </Label>
+      <Label fx:id="lblDiagnosis" text="Diagnosis:" GridPane.rowIndex="2">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+      </Label>
+      <FlowPane hgap="10.0" maxWidth="1.7976931348623157E308">
+         <children>
+            <Label text="Patient:" />
+            <Label fx:id="lblPatientName" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </FlowPane>
+      <TextArea fx:id="txtDiagnosis" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+      <TextArea fx:id="txtTreatment" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+</GridPane>

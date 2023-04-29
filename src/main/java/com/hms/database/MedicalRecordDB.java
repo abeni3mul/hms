@@ -3,10 +3,7 @@ package com.hms.database;
 import com.hms.business.MedicalRecord;
 import com.hms.exceptions.UnexpectedErrorException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -57,20 +54,25 @@ public class MedicalRecordDB {
         try{
             PreparedStatement st = db.prepareStatement("select " +
                         "MR.*," +
-                        "D.\"firstName\" as \"doctorFirstName\", " +
+                        "D.\"firstName\" as \"doctorFirstName\"," +
                         "D.\"middleName\" as \"doctorMiddleName\"," +
                         "D.\"lastName\" as \"doctorLastName\"," +
                         "N.\"firstName\" as \"nurseFirstName\"," +
                         "N.\"middleName\" as \"nurseMiddleName\"," +
-                        "N.\"lastName\" as \"nurseLastName\"" +
+                        "N.\"lastName\" as \"nurseLastName\"," +
+                        "P.\"firstName\" as \"patientFirstName\"," +
+                        "P.\"middleName\" as \"patientMiddleName\"," +
+                        "P.\"lastName\" as \"patientLastName\" " +
                     "from \"MedicalRecord\" as MR " +
                     "left join \"Doctor\" D on D.\"doctorId\" = MR.\"doctorId\" " +
-                    "left join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\"" +
-                    "where MR.\"recordId\" = ?;"
+                    "left join \"Nurse\" N on N.\"nurseId\" = MR.\"nurseId\" " +
+                    "join \"Patient\" P on P.\"patientId\" = MR.\"patientId\" " +
+                    "where MR.\"recordId\" = ?::uuid;"
             );
 
             st.setString(1, medicalRecordId.toString());
             ResultSet rs = st.executeQuery();
+            rs.next();
 
             MedicalRecord medicalRecord = MedicalRecord.map(rs);
             medicalRecord.setRecordId(medicalRecordId);
@@ -95,8 +97,14 @@ public class MedicalRecordDB {
             );
 
             st.setInt(1, medicalRecord.getPatientId());
-            st.setInt(2, medicalRecord.getDoctorId());
-            st.setInt(3, medicalRecord.getNurseId());
+            if(medicalRecord.getDoctorId() != 0)
+                st.setInt(2, medicalRecord.getDoctorId());
+            else
+                st.setNull(2, Types.INTEGER);
+            if(medicalRecord.getNurseId() != 0)
+                st.setInt(3, medicalRecord.getNurseId());
+            else
+                st.setNull(3, Types.INTEGER);
             st.setString(4, medicalRecord.getDiagnosis());
             st.setString(5, medicalRecord.getTreatment());
 

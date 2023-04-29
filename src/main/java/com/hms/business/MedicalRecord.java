@@ -19,6 +19,7 @@ public class MedicalRecord {
     private String treatment;
     private Doctor doctor;
     private Nurse nurse;
+    private Patient patient;
 
     public UUID getRecordId() {
         return this.recordId;
@@ -84,12 +85,26 @@ public class MedicalRecord {
         this.nurse = nurse;
     }
 
+    public Patient getPatient(){
+        return this.patient;
+    }
+    public void setPatient(Patient patient){
+        this.patient = patient;
+    }
     public static ArrayList<MedicalRecord> getMedicalRecordByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
         return new MedicalRecordDB().getMedicalRecordByPatientId(patientId);
     }
 
     public static ArrayList<MedicalRecord> getMedicationByPatientId(int patientId) throws SQLException, UnexpectedErrorException {
         return new MedicalRecordDB().getMedicalRecordByPatientId(patientId, true);
+    }
+
+    public static MedicalRecord getMedicalRecord(UUID medicalRecordId) throws SQLException, UnexpectedErrorException {
+        return new MedicalRecordDB().getMedicalRecord(medicalRecordId);
+    }
+
+    public void save() throws SQLException, UnexpectedErrorException {
+        new MedicalRecordDB().addMedicalRecord(this);
     }
 
     public static MedicalRecord map(ResultSet rs) throws SQLException {
@@ -110,7 +125,29 @@ public class MedicalRecord {
             n.setLastName(rs.getString("nurseLastName"));
             medicalRecord.setNurse(n);
         }
-
+        boolean patientColExists = false;
+        boolean diagnosisExists = false;
+        boolean treatmentExists = false;
+        for(int i = 1; i < rs.getMetaData().getColumnCount(); i++){
+            String columnName = rs.getMetaData().getColumnName(i);
+            if(columnName.equals("patientFirstName"))
+                patientColExists = true;
+            if(columnName.equals("diagnosis"))
+                diagnosisExists = true;
+            if(columnName.equals("treatment"))
+                treatmentExists = true;
+        }
+        if(patientColExists && (rs.getString("patientFirstName") != null || !rs.getString("patientFirstName").trim().equals(""))){
+            Patient p = new Patient();
+            p.setFirstName(rs.getString("patientFirstName"));
+            p.setMiddleName(rs.getString("patientMiddleName"));
+            p.setLastName(rs.getString("patientLastName"));
+            medicalRecord.setPatient(p);
+        }
+        if(diagnosisExists)
+            medicalRecord.setDiagnosis(rs.getString("diagnosis"));
+        if(treatmentExists)
+            medicalRecord.setTreatment(rs.getString("treatment"));
         return medicalRecord;
     }
 }
