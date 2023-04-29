@@ -1,19 +1,25 @@
 package com.hms.presentation;
 
+import com.hms.business.Doctor;
+import com.hms.business.Manager;
+import com.hms.business.Nurse;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.nio.channels.Pipe;
+import java.util.ArrayList;
 
-public class ManagerTable {
+public class StaffTable {
+    private int id;
+
      private SimpleStringProperty fullName;
      private SimpleStringProperty position;
      private SimpleStringProperty phoneNumber;
      private SimpleStringProperty email;
      private SimpleStringProperty dateOfBirth;
+     private SimpleStringProperty speciality;
 
 
-
-    public ManagerTable (String fullName, String position, String phoneNumber, String email, String dateOfBirth){
+    public StaffTable(int id, String fullName, String position, String phoneNumber, String email, String dateOfBirth){
+        this.id = id;
         this.fullName = new SimpleStringProperty(fullName);
         this.position = new SimpleStringProperty(position);
         this.phoneNumber = new SimpleStringProperty(phoneNumber);
@@ -21,7 +27,9 @@ public class ManagerTable {
         this.dateOfBirth = new SimpleStringProperty(dateOfBirth);
 
     }
-
+    public int getId(){
+        return this.id;
+    }
     public String getFullName() {
         return fullName.get();
     }
@@ -80,6 +88,31 @@ public class ManagerTable {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth.set(dateOfBirth);
+    }
+
+    public static ArrayList<StaffTable> map(ArrayList<Nurse> nurses, ArrayList<Doctor>doctors){
+        ArrayList<StaffTable> staffTableList = new ArrayList<>();
+        for(Nurse nurse : nurses){
+            staffTableList.add(new StaffTable(
+                    nurse.getNurseId(),
+                    nurse.getFirstName() + " " + nurse.getMiddleName().charAt(0) + ". " + nurse.getLastName(),
+                    "Nurse",
+                    nurse.getPhoneNumber(),
+
+                    nurse.getEmail(),
+                    nurse.getDateOfBirth().toString()
+            ));
+        }
+        for(Doctor doctor : doctors)
+            staffTableList.add(new StaffTable(
+                    doctor.getDoctorId(),
+                    doctor.getFirstName() + " " + doctor.getMiddleName() + " " + doctor.getLastName(),
+                    "doctor",
+                    doctor.getPhoneNumber(),
+                    doctor.getEmail(),
+                    doctor.getDateOfBirth().toString()
+            ));
+        return staffTableList;
     }
 
 }

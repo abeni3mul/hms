@@ -1,16 +1,16 @@
 package com.hms.presentation;
 
+import com.hms.business.Manager;
 import com.hms.business.Patient;
+import com.hms.database.ManagerDB;
 import com.hms.database.PatientDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.effect.Glow;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -112,4 +112,8 @@ public class UserController {
             alert.showAndWait();
         }
     }
-}
+
+
+    }
+
+

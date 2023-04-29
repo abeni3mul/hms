@@ -1,10 +1,12 @@
 package com.hms.business;
 
+import javafx.scene.Node;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class Manager {
+public class Manager extends Node {
     private int managerId;
     private String firstName;
     private String middleName;
@@ -13,6 +15,15 @@ public class Manager {
     private String phoneNumber;
     private String email;
     private String password;
+    private String position;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public int getManagerId() {
         return this.managerId;
